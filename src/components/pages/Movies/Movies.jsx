@@ -1,8 +1,8 @@
-import React from 'react'
+import { useApi } from 'hooks/useApi';
+import React from 'react';
 
 export default function Movies() {
-  return (
-    <div>Movies</div>
-  )
+  const [movies] = useApi('/search/movie', { query: 'king' });
+  console.log(movies);
+  return <div>Movies</div>;
 }
-

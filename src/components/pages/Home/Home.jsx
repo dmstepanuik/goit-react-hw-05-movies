@@ -1,27 +1,21 @@
-import React from 'react';
-import axios from 'axios';
+import { useApi } from 'hooks/useApi';
 
-function Home(props) {
-  useEffect(() => {
-    axios.get('');
-
-    return () => {
-      second;
-    };
-  }, [third]);
+function Home() {
+  const [data] = useApi('/trending/movie/day');
 
   return (
-    <>
-      <h1>Trending today</h1>;
-      <ul>
-        <li>Movie1</li>
-        <li>Movie2</li>
-        <li>Movie3</li>
-      </ul>
-    </>
+    movies && (
+      <>
+        <h1>Trending today</h1>;
+        <ul>
+          {movies.map(movie => {
+            console.log(movie);
+            return <li key={movie.id}>{movie.title}</li>;
+          })}
+        </ul>
+      </>
+    )
   );
 }
 
 export default Home;
-
-const key = f860fd14767163b7a314379672b23f90;
