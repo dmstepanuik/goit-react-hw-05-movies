@@ -1,18 +1,17 @@
+import MovieList from 'components/common/MovieList/MovieList';
+import SearchForm from 'components/common/SearchForm/SearchForm';
 import { useSearchMovies } from 'hooks/useTrendingApi';
 
 export default function Movies() {
-  const { movies } = useSearchMovies('cat');
+  const { movies, setSearch } = useSearchMovies('');
+
   // console.log(movies);
   return (
     movies && (
       <>
         <h1>Movies</h1>;
-        <ul>
-          {movies.map(movie => {
-            console.log(movie);
-            return <li key={movie.id}>{movie.title}</li>;
-          })}
-        </ul>
+        <SearchForm setSearch={setSearch} />
+        <MovieList movies={movies} />
       </>
     )
   );

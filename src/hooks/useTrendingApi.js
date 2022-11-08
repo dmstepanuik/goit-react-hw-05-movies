@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const API_KEY = 'f860fd14767163b7a314379672b23f90';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
@@ -29,8 +29,13 @@ export function useSearchMovies(initSearch = '') {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState(initSearch);
+  const isFirst = useRef(true);
 
   useEffect(() => {
+    if (isFirst.current) {
+      isFirst.current = false;
+      return;
+    }
     const options = {
       params: {
         api_key: API_KEY,
@@ -44,7 +49,7 @@ export function useSearchMovies(initSearch = '') {
       setLoading(false);
     });
   }, [search]);
-  console.log(movies);
+  // console.log(movies);
 
   return { movies, setSearch, loading };
 }

@@ -1,3 +1,4 @@
+import MovieList from 'components/common/MovieList/MovieList';
 import { useTrendingApi } from 'hooks/useTrendingApi';
 
 function Home() {
@@ -7,12 +8,7 @@ function Home() {
     movies && (
       <>
         <h1>Trending today</h1>;
-        <ul>
-          {movies.map(movie => {
-            // console.log(movie);
-            return <li key={movie.id}>{movie.title}</li>;
-          })}
-        </ul>
+        <MovieList movies={movies} />
       </>
     )
   );
