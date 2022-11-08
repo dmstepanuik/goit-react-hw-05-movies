@@ -1,5 +1,4 @@
 import { useTrendingApi } from 'hooks/useTrendingApi';
-import { NavLink } from 'react-router-dom';
 
 function Home() {
   const [movies] = useTrendingApi('/trending/movie/day');
