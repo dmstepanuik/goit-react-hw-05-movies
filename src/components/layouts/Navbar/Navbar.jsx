@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <>
       <nav className={s.container}>
-        <NavLink className={linkClass} to={BASE_PATH}>
+        <NavLink className={linkClass} to={BASE_PATH} end>
           Home
         </NavLink>
         <NavLink className={linkClass} to={`${BASE_PATH}/movies`}>
