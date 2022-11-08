@@ -1,1 +1,2 @@
-console.log('string1' && 'string2');
+const string = 'string';
+console.log(`;alksdjf${string}a;sdlkfj`);
