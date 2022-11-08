@@ -1,7 +1,7 @@
 import { useSearchMovies } from 'hooks/useTrendingApi';
 
 export default function Movies() {
-  const { movies, setSearch } = useSearchMovies('cat');
+  const { movies } = useSearchMovies('cat');
   // console.log(movies);
   return (
     movies && (
