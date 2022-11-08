@@ -1,7 +1,7 @@
-import { useApi } from 'hooks/useApi';
+import { useTrendingApi } from 'hooks/useTrendingApi';
 
 function Home() {
-  const [data] = useApi('/trending/movie/day');
+  const [movies] = useTrendingApi('/trending/movie/day');
 
   return (
     movies && (

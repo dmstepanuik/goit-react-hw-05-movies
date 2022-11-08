@@ -1,8 +1,19 @@
-import { useApi } from 'hooks/useApi';
-import React from 'react';
+import { useSearchMovies } from 'hooks/useTrendingApi';
 
 export default function Movies() {
-  const [movies] = useApi('/search/movie', { query: 'king' });
-  console.log(movies);
-  return <div>Movies</div>;
+  const { movies, setSearch } = useSearchMovies('cat');
+  // console.log(movies);
+  return (
+    movies && (
+      <>
+        <h1>Movies</h1>;
+        <ul>
+          {movies.map(movie => {
+            console.log(movie);
+            return <li key={movie.id}>{movie.title}</li>;
+          })}
+        </ul>
+      </>
+    )
+  );
 }
