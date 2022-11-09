@@ -1,5 +1,6 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { BASE_PATH } from 'variables/variables';
 import { useIsFirstRender } from './useFirstRender';
 
 const API_KEY = 'f860fd14767163b7a314379672b23f90';
@@ -55,18 +56,54 @@ export function useSearchMovies(initSearch = '') {
 
 export function useGetMovieDetails(movieId) {
   const [loading, setLoading] = useState(false);
+  const [movie, setMovie] = useState({});
+  const [done, setDone] = useState(false);
 
   useEffect(() => {
     setLoading(true);
     themoviedb.get(`/movie/${movieId}`).then(res => {
-      console.log(res);
+      // console.log(res);
+      setMovie(res.data);
+      setDone(true);
       setLoading(false);
     });
   }, [movieId]);
 
-  return { loading };
+  return { loading, movie, done };
 }
 
-export function useGetMovieCast() {}
+export function useGetMovieCast(movieId) {
+  const [loading, setLoading] = useState(false);
+  const [cast, setCast] = useState({});
+  const [done, setDone] = useState(false);
 
-export function useGetMovieReviews() {}
+  useEffect(() => {
+    setLoading(true);
+    themoviedb.get(`/movie/${movieId}/credits`).then(res => {
+      setCast(res.data.cast);
+      setDone(true);
+      setLoading(false);
+    });
+  }, [movieId]);
+
+  return { loading, cast, done };
+}
+
+export function useGetMovieReviews(movieId) {
+  const [loading, setLoading] = useState(false);
+  const [reviews, setReviews] = useState({});
+
+  const [done, setDone] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    themoviedb.get(`/movie/${movieId}/reviews`).then(res => {
+      setReviews(res.data.results);
+      // console.log(res.data.results);
+      setDone(true);
+      setLoading(false);
+    });
+  }, [movieId]);
+
+  return { loading, reviews, done };
+}

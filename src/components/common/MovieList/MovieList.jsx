@@ -5,7 +5,7 @@ export default function MovieList({ movies }) {
   return (
     <ul>
       {movies.map(movie => {
-        return <MovieItem key={movie.id} title={movie.title} />;
+        return <MovieItem key={movie.id} title={movie.title} id={movie.id} />;
       })}
     </ul>
   );

@@ -1,6 +1,5 @@
-const name = 'Dmitro';
-console.log(`My name's ${name}`); // My name's Dmitro.
-const guestName = 'Манго';
-const roomNumber = 207;
-const greeting = `Welcome ${guestName}, your rom number is ${roomNumber}`;
-console.log(greeting); // "Welcome Mango, your room number is 207!"
+const arr = [1, 2, 4];
+const arr2 = arr.map(arr3 => {
+  return arr3 * 2;
+});
+console.log(arr2);

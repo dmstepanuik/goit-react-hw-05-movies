@@ -9,7 +9,7 @@ export default function Movies() {
   return (
     movies && (
       <>
-        <h1>Movies</h1>;
+        <h1>Movies</h1>
         <SearchForm setSearch={setSearch} />
         <MovieList movies={movies} />
       </>
