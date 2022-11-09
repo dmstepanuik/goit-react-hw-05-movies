@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { useState, useEffect, useRef } from 'react';
-import { BASE_PATH } from 'variables/variables';
+import { useState, useEffect } from 'react';
+
 import { useIsFirstRender } from './useFirstRender';
 
 const API_KEY = 'f860fd14767163b7a314379672b23f90';
