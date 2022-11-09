@@ -1,22 +1,24 @@
 import axios from 'axios';
 import { useState, useEffect, useRef } from 'react';
+import { useIsFirstRender } from './useFirstRender';
 
 const API_KEY = 'f860fd14767163b7a314379672b23f90';
-axios.defaults.baseURL = 'https://api.themoviedb.org/3';
+
+const themoviedb = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
+  params: {
+    api_key: API_KEY,
+    language: 'en-US',
+  },
+});
 
 export function useTrendingApi() {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    const options = {
-      params: {
-        api_key: API_KEY,
-        language: 'en-US',
-      },
-    };
     setLoading(true);
-    axios.get('/trending/movie/day', options).then(res => {
+    themoviedb.get('/trending/movie/day').then(res => {
       setData(res.data.results);
       setLoading(false);
     });
@@ -29,27 +31,42 @@ export function useSearchMovies(initSearch = '') {
   const [loading, setLoading] = useState(false);
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState(initSearch);
-  const isFirst = useRef(true);
+  const isFirst = useIsFirstRender();
 
   useEffect(() => {
-    if (isFirst.current) {
-      isFirst.current = false;
-      return;
-    }
+    if (isFirst.current || search === '') return;
+
     const options = {
       params: {
-        api_key: API_KEY,
-        language: 'en-US',
         query: search,
       },
     };
+
     setLoading(true);
-    axios.get('/search/movie', options).then(res => {
+    themoviedb.get('/search/movie', options).then(res => {
       setMovies(res.data.results);
       setLoading(false);
     });
-  }, [search]);
+  }, [isFirst, search]);
   // console.log(movies);
 
   return { movies, setSearch, loading };
 }
+
+export function useGetMovieDetails(movieId) {
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    themoviedb.get(`/movie/${movieId}`).then(res => {
+      console.log(res);
+      setLoading(false);
+    });
+  }, [movieId]);
+
+  return { loading };
+}
+
+export function useGetMovieCast() {}
+
+export function useGetMovieReviews() {}

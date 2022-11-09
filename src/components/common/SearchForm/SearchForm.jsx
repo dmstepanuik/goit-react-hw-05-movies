@@ -4,9 +4,9 @@ export default function SearchForm({ setSearch }) {
   function onSubmit(e) {
     e.preventDefault();
     const form = e.target;
-    const { value } = form.elements.search;
+    const value = form.elements.search.value.trim().toLowerCase();
 
-    if (value.trim() === '') return;
+    if (value === '') return;
 
     setSearch(value);
     form.reset();
