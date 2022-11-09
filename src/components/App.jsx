@@ -10,11 +10,9 @@ export const App = () => {
     <>
       <Navbar />
       <Routes>
-        <Route path={BASE_PATH}>
-          <Route path="" element={<Home />} />
-          <Route path="movies" element={<Movies />} />
-          <Route path="movies/:id" element={<MovieDetails />} />
-        </Route>
+        <Route path="" element={<Home />} />
+        <Route path="movies" element={<Movies />} />
+        <Route path="movies/:id" element={<MovieDetails />} />
         <Route path="*" element={<h1>Not found</h1>} />
       </Routes>
     </>
