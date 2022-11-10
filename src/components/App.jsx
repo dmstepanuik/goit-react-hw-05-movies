@@ -1,3 +1,4 @@
+import SearchMoviesCtx from 'context/searchMoviesCtx';
 import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './layouts/Navbar/Navbar';
@@ -18,16 +19,18 @@ export const App = () => {
     <>
       <Navbar />
       <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="" element={<Home />} />
-          <Route path="movies" element={<Movies />} />
-          <Route path="movies/:id" element={<MovieDetails />}>
-            <Route path="cast" element={<Cast />} />
-            <Route path="reviews" element={<Reviews />} />
-          </Route>
+        <SearchMoviesCtx>
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="movies" element={<Movies />} />
+            <Route path="movies/:id" element={<MovieDetails />}>
+              <Route path="cast" element={<Cast />} />
+              <Route path="reviews" element={<Reviews />} />
+            </Route>
 
-          <Route path="*" element={<h1>Not found</h1>} />
-        </Routes>
+            <Route path="*" element={<h1>Not found</h1>} />
+          </Routes>
+        </SearchMoviesCtx>
       </Suspense>
     </>
   );

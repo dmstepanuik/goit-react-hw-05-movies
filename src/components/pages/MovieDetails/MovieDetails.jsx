@@ -33,7 +33,9 @@ export default function MovieDetails() {
 
     return (
       <div>
-        <Link to={fromLocation || '/'}>back</Link>
+        <Link to={fromLocation || '/'} state={'MovieDetails'}>
+          back
+        </Link>
 
         <div>
           <img src={imgUrl} alt="" width={200} />

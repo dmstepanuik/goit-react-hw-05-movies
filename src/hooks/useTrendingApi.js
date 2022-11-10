@@ -45,6 +45,7 @@ export function useSearchMovies(initSearch = '') {
 
     setLoading(true);
     themoviedb.get('/search/movie', options).then(res => {
+
       setMovies(res.data.results);
       setLoading(false);
     });
